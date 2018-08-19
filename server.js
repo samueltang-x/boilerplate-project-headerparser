@@ -24,6 +24,21 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// Request Header Parser
+app.get("/api/whoami", function (req, res) {
+  
+  var clientIp = req.connection["remoteAddress"];
+  var acceptLanguage = req.headers["accept-language"];
+  var userAgent = req.headers["user-agent"];
+  
+  //console.log("Client IP: ", req.connection.remoteAddress);
+  //console.log("accept-language: ", req.headers["accept-language"]);
+  //console.log("user-agent: ", req.headers["user-agent"]);
+  
+  var resBody = {ipaddress: clientIp, language: acceptLanguage, software: userAgent};
+  
+  res.json(resBody);
+});
 
 
 // listen for requests :)
